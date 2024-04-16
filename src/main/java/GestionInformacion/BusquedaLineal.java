@@ -10,12 +10,13 @@ public class BusquedaLineal {
         BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo));
         String linea;
         int numLinea = 0;
+        palabraBusqueda = palabraBusqueda.toLowerCase();
 
         while ((linea = reader.readLine()) != null) {
             numLinea++;
             String[] palabras = linea.split("\\s+");
             for (int i = 0; i < palabras.length; i++) {
-                if (palabras[i].equals(palabraBusqueda)) {
+                if (palabras[i].toLowerCase().equals(palabraBusqueda)) {
                     System.out.println("Palabra '" + palabraBusqueda + "' encontrada en la línea " + numLinea + ", palabra " + (i+1));
                 }
             }

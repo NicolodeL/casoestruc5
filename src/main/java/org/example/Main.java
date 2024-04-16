@@ -2,9 +2,11 @@ package org.example;
 
 import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
+import GestionInformacion.BusquedaLineal;
 import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
+import GestionInformacion.BusquedaLineal;
 
 import java.io.IOException;
 
@@ -49,6 +51,13 @@ public class Main {
             System.out.println("Archivo ordenado exitosamente.");
         } catch (IOException e) {
             System.out.println("Ocurrió un error al ordenar el archivo: " + e.getMessage());
+        }
+
+        BusquedaLineal busquedaLineal = new BusquedaLineal();
+        try {
+            busquedaLineal.buscarPalabra("src/main/java/archivostxt/Buscame.txt", "loro");
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al buscar la palabra: " + e.getMessage());
         }
 
 }
