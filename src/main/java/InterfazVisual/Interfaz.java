@@ -2,9 +2,11 @@ package InterfazVisual;
 
 import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
+import GestionInformacion.BusquedaBinaria;
+import GestionInformacion.BusquedaLineal;
+import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
-import GestionInformacion.OrganizacionDocumentos;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,13 @@ public class Interfaz {
     private JTextArea fileResultTextArea;
     private JTextField combTextField;
     private JTextArea combResultTextArea;
+    private JTextField baseTextField;
+    private JTextField exponentTextField;
+    private JTextArea powerResultTextArea;
+    private JTextField binarySearchTextField;
+    private JTextArea binarySearchResultTextArea;
+    private JTextField linearSearchTextField;
+    private JTextArea linearSearchResultTextArea;
 
     public Interfaz() {
         frame = new JFrame("Analizador");
@@ -45,6 +54,18 @@ public class Interfaz {
         // Panel de combinaciones genéticas
         JPanel geneticCombinationsPanel = createGeneticCombinationsPanel();
         tabbedPane.addTab("Combinaciones Genéticas", geneticCombinationsPanel);
+
+        // Panel de potencias y máximos
+        JPanel powerAndMaxPanel = createPowerAndMaxPanel();
+        tabbedPane.addTab("Potencias y Máximos", powerAndMaxPanel);
+
+        // Panel de búsqueda binaria
+        JPanel binarySearchPanel = createBinarySearchPanel();
+        tabbedPane.addTab("Búsqueda Binaria", binarySearchPanel);
+
+        // Panel de búsqueda lineal
+        JPanel linearSearchPanel = createLinearSearchPanel();
+        tabbedPane.addTab("Búsqueda Lineal", linearSearchPanel);
 
         frame.add(tabbedPane);
         frame.setVisible(true);
@@ -149,6 +170,81 @@ public class Interfaz {
         return panel;
     }
 
+    private JPanel createPowerAndMaxPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        baseTextField = new JTextField();
+        exponentTextField = new JTextField();
+        JButton calculateButton = new JButton("Calcular Potencia");
+        powerResultTextArea = new JTextArea();
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculatePower();
+            }
+        });
+
+        panel.add(new JLabel("Introduce la base:"));
+        panel.add(baseTextField);
+        panel.add(new JLabel("Introduce el exponente:"));
+        panel.add(exponentTextField);
+        panel.add(calculateButton);
+        panel.add(new JLabel("Resultado:"));
+        panel.add(powerResultTextArea);
+
+        return panel;
+    }
+
+    private JPanel createBinarySearchPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        binarySearchTextField = new JTextField();
+        JButton searchButton = new JButton("Buscar Palabra");
+        binarySearchResultTextArea = new JTextArea();
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                binarySearch();
+            }
+        });
+
+        panel.add(new JLabel("Introduce la palabra a buscar:"));
+        panel.add(binarySearchTextField);
+        panel.add(searchButton);
+        panel.add(new JLabel("Resultado:"));
+        panel.add(binarySearchResultTextArea);
+
+        return panel;
+    }
+
+    private JPanel createLinearSearchPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        linearSearchTextField = new JTextField();
+        JButton searchButton = new JButton("Buscar Palabra");
+        linearSearchResultTextArea = new JTextArea();
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                linearSearch();
+            }
+        });
+
+        panel.add(new JLabel("Introduce la palabra a buscar:"));
+        panel.add(linearSearchTextField);
+        panel.add(searchButton);
+        panel.add(new JLabel("Resultado:"));
+        panel.add(linearSearchResultTextArea);
+
+        return panel;
+    }
+
     private void analyzeDNA() {
         String dna = dnaTextField.getText();
         int count = ConteoGenes.contarGenes(dna);
@@ -177,6 +273,35 @@ public class Interfaz {
         int num = Integer.parseInt(combTextField.getText());
         CombinacionesGeneticas.calcularCombinaciones(num, "");
         combResultTextArea.setText("Combinaciones calculadas. Consulta la consola para ver los resultados.");
+    }
+
+    private void calculatePower() {
+        double base = Double.parseDouble(baseTextField.getText());
+        int exponent = Integer.parseInt(exponentTextField.getText());
+        double power = PontenciasyMaximos.calcularPotencia(base, exponent);
+        powerResultTextArea.setText("La potencia es: " + power);
+    }
+
+    private void binarySearch() {
+        String word = binarySearchTextField.getText();
+        BusquedaBinaria busquedaBinaria = new BusquedaBinaria();
+        try {
+            boolean found = busquedaBinaria.buscarPalabra("src/main/java/archivostxt/ordename2.txt", word);
+            binarySearchResultTextArea.setText(found ? "Palabra encontrada." : "Palabra no encontrada.");
+        } catch (IOException e) {
+            binarySearchResultTextArea.setText("Ocurrió un error al buscar la palabra: " + e.getMessage());
+        }
+    }
+
+    private void linearSearch() {
+        String word = linearSearchTextField.getText();
+        BusquedaLineal busquedaLineal = new BusquedaLineal();
+        try {
+            boolean found = busquedaLineal.buscarPalabra("src/main/java/archivostxt/Buscame.txt", word);
+            linearSearchResultTextArea.setText(found ? "Palabra encontrada." : "Palabra no encontrada.");
+        } catch (IOException e) {
+            linearSearchResultTextArea.setText("Ocurrió un error al buscar la palabra: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

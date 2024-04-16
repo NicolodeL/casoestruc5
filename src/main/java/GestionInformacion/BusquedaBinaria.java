@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class BusquedaBinaria {
 
-    public void buscarPalabra(String rutaArchivo, String palabraBusqueda) throws IOException {
+    public boolean buscarPalabra(String rutaArchivo, String palabraBusqueda) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo));
         String linea;
         int numLinea = 0;
@@ -24,5 +24,6 @@ public class BusquedaBinaria {
             }
         }
         reader.close();
+        return false;
     }
 }
