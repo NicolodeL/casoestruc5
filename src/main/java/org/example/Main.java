@@ -3,6 +3,7 @@ package org.example;
 import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
+import HerramientaAnalisisNumerico.SumatorioyListado;
 
 
 public class Main {
@@ -13,6 +14,13 @@ public class Main {
 
         System.out.println("Combinaciones de genes de 3 letras:");
         CombinacionesGeneticas.calcularCombinaciones(3, "Aaa");
+
+        int suma = SumatorioyListado.calcularSuma(10);
+        System.out.println("La suma de los primeros 10 números naturales es: " + suma);
+
+        // Listar los números del 1 al 10
+        System.out.println("Los números del 1 al 10 son:");
+        SumatorioyListado.listarNumeros(1, 10);
 
         // Llamada al método calcularPotencia
         double base = 2.0;
