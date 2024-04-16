@@ -4,9 +4,6 @@ import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 
-import java.util.Scanner;
-
-import static HerramientaAnalisisNumerico.SumatorioyListado.Fibonacci.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,11 +13,6 @@ public class Main {
 
         System.out.println("Combinaciones de genes de 3 letras:");
         CombinacionesGeneticas.calcularCombinaciones(3, "Aaa");
-
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[][] result = matrixMultiplication(fib(n), baseFibNumbers);
-        System.out.println("Fib(" + n + ") = " + result[1][0]);
 
         // Llamada al método calcularPotencia
         double base = 2.0;
@@ -33,6 +25,5 @@ public class Main {
         double maximo = PontenciasyMaximos.encontrarMaximo(datos);
         System.out.println("Máximo: " + maximo);
 
-        sc.close();
     }
 }
