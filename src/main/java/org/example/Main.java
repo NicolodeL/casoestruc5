@@ -2,11 +2,11 @@ package org.example;
 
 import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
+import GestionInformacion.BusquedaBinaria;
 import GestionInformacion.BusquedaLineal;
 import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
-
 import java.io.IOException;
 
 
@@ -58,6 +58,13 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Ocurrió un error al buscar la palabra: " + e.getMessage());
         }
+            BusquedaBinaria busquedaBinaria = new BusquedaBinaria();
+            try {
+                busquedaBinaria.buscarPalabra("src/main/java/archivostxt/ordename2.txt", "para");
+            } catch (IOException e) {
+                System.out.println("Ocurrió un error al buscar la palabra: " + e.getMessage());
+            }
+
 
 }
 }
