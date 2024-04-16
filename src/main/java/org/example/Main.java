@@ -2,8 +2,11 @@ package org.example;
 
 import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
+import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
+
+import java.io.IOException;
 
 
 public class Main {
@@ -32,6 +35,21 @@ public class Main {
         double[] datos = {1.2, 3.4, 0.8, 5.6, 4.3};
         double maximo = PontenciasyMaximos.encontrarMaximo(datos);
         System.out.println("Máximo: " + maximo);
+
+        // Crear una instancia de OrganizacionDocumentos
+        OrganizacionDocumentos organizacionDocumentos = new OrganizacionDocumentos();
+
+        // Definir la ruta del archivo de entrada y la ruta del archivo de salida
+        String rutaArchivoEntrada = "src/main/java/archivostxt/ordename.txt";
+        String rutaArchivoSalida = "src/main/java/archivostxt/ordename2.txt";
+
+        // Ordenar el archivo
+        try {
+            organizacionDocumentos.ordenarArchivo(rutaArchivoEntrada, rutaArchivoSalida);
+            System.out.println("Archivo ordenado exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al ordenar el archivo: " + e.getMessage());
+        }
 
 }
 }
