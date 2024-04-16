@@ -2,7 +2,9 @@ package GestionInformacion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeSet;
 
 public class GestionFechas {
@@ -23,9 +25,12 @@ public class GestionFechas {
         }
     }
 
-    public void listarFechas() {
+    public List<String> listarFechas() {
+        List<String> fechasListadas = new ArrayList<>();
         for (Date fecha : fechas) {
-            System.out.println(formatoFecha.format(fecha));
+            fechasListadas.add(formatoFecha.format(fecha));
         }
+        return fechasListadas;
     }
+
 }

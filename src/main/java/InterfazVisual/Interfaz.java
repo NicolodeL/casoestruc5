@@ -4,9 +4,11 @@ import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import GestionInformacion.BusquedaBinaria;
 import GestionInformacion.BusquedaLineal;
+import GestionInformacion.GestionFechas;
 import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,6 +33,9 @@ public class Interfaz {
     private JTextArea binarySearchResultTextArea;
     private JTextField linearSearchTextField;
     private JTextArea linearSearchResultTextArea;
+    private JTextField fechaTextField;
+    private JTextArea fechaResultTextArea;
+    private GestionFechas gestionFechas;
 
     public Interfaz() {
         frame = new JFrame("Analizador");
@@ -66,6 +71,13 @@ public class Interfaz {
         // Panel de búsqueda lineal
         JPanel linearSearchPanel = createLinearSearchPanel();
         tabbedPane.addTab("Búsqueda Lineal", linearSearchPanel);
+
+        frame.add(tabbedPane);
+        frame.setVisible(true);
+
+        // Panel de gestión de fechas
+        JPanel fechaPanel = createFechaPanel();
+        tabbedPane.addTab("Gestión de Fechas", fechaPanel);
 
         frame.add(tabbedPane);
         frame.setVisible(true);
@@ -245,6 +257,39 @@ public class Interfaz {
         return panel;
     }
 
+    private JPanel createFechaPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        fechaTextField = new JTextField();
+        JButton addButton = new JButton("Agregar Fecha");
+        fechaResultTextArea = new JTextArea();
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarFecha();
+            }
+        });
+
+        JButton listButton = new JButton("Listar Fechas");
+        listButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listarFechas();
+            }
+        });
+
+        panel.add(new JLabel("Introduce la fecha (dd/MM/yyyy):"));
+        panel.add(fechaTextField);
+        panel.add(addButton);
+        panel.add(listButton);
+        panel.add(new JLabel("Fechas:"));
+        panel.add(fechaResultTextArea);
+
+        return panel;
+    }
+
     private void analyzeDNA() {
         String dna = dnaTextField.getText();
         int count = ConteoGenes.contarGenes(dna);
@@ -304,7 +349,22 @@ public class Interfaz {
         }
     }
 
+    private void agregarFecha() {
+        String fecha = fechaTextField.getText();
+        gestionFechas.agregarFecha(fecha);
+        fechaTextField.setText("");
+    }
+
+    private void listarFechas() {
+        fechaResultTextArea.setText("");
+        for (String fecha : gestionFechas.listarFechas()) {
+            fechaResultTextArea.append(fecha + "\n");
+        }
+    }
+
     public static void main(String[] args) {
         new Interfaz();
     }
+
+
 }
