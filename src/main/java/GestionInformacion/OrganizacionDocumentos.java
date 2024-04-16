@@ -1,6 +1,6 @@
 package GestionInformacion;
-
-public class OrganizacionDocumentos<T extends Comparable<T>> {
+import java.io.*;
+class QuickSort<T extends Comparable<T>> {
 
     public void sort(T[] array) {
         quickSort(array, 0, array.length - 1);
@@ -38,5 +38,30 @@ public class OrganizacionDocumentos<T extends Comparable<T>> {
         T temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+}
+
+public class OrganizacionDocumentos {
+
+    private QuickSort<String> quickSort;
+
+    public OrganizacionDocumentos() {
+        this.quickSort = new QuickSort<>();
+    }
+
+    public void ordenarArchivo(String rutaArchivoEntrada, String rutaArchivoSalida) throws IOException {
+        // Leer todas las líneas del archivo
+        String[] lineas = new BufferedReader(new FileReader(rutaArchivoEntrada)).lines().toArray(String[]::new);
+
+        // Ordenar las líneas
+        quickSort.sort(lineas);
+
+        // Escribir las líneas ordenadas en el archivo de salida
+        BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivoSalida));
+        for (String linea : lineas) {
+            writer.write(linea);
+            writer.newLine();
+        }
+        writer.close();
     }
 }

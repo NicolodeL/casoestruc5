@@ -4,7 +4,7 @@ import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
-import GestionInformacion.OrganizacionDocumentos;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -32,19 +32,6 @@ public class Main {
         double[] datos = {1.2, 3.4, 0.8, 5.6, 4.3};
         double maximo = PontenciasyMaximos.encontrarMaximo(datos);
         System.out.println("Máximo: " + maximo);
-        OrganizacionDocumentos<String> organizacionDocumentos = new OrganizacionDocumentos<>();
 
-        // Crear un array de Strings para ordenar
-        String[] array = {"z", "b", "a", "c"};
-
-        // Ordenar el array
-        organizacionDocumentos.sort(array);
-
-        // Imprimir el array ordenado
-        for (String s : array) {
-            System.out.println(s);
-        }
-    }
-
-
-    }
+}
+}
