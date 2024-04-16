@@ -4,6 +4,7 @@ import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import GestionInformacion.BusquedaBinaria;
 import GestionInformacion.BusquedaLineal;
+import GestionInformacion.GestionFechas;
 import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
@@ -64,6 +65,15 @@ public class Main {
             } catch (IOException e) {
                 System.out.println("Ocurrió un error al buscar la palabra: " + e.getMessage());
             }
+        GestionFechas gestionFechas = new GestionFechas();
+
+        // Agregar algunas fechas
+        gestionFechas.agregarFecha("01/01/2022");
+        gestionFechas.agregarFecha("15/02/2022");
+        gestionFechas.agregarFecha("10/01/2022");
+
+        // Listar las fechas
+        gestionFechas.listarFechas();
 
 
 }
