@@ -6,7 +6,6 @@ import GestionInformacion.BusquedaLineal;
 import GestionInformacion.OrganizacionDocumentos;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
-import GestionInformacion.BusquedaLineal;
 
 import java.io.IOException;
 
