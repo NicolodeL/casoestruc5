@@ -74,6 +74,7 @@ public class Main {
 
         // Listar las fechas
         gestionFechas.listarFechas();
+        //Comprobada la funcionalidad de todo
 
 
 }
