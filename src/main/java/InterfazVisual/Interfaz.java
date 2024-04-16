@@ -1,5 +1,6 @@
 package InterfazVisual;
 
+import AnalisisGenomico.CombinacionesGeneticas;
 import AnalisisGenomico.ConteoGenes;
 import HerramientaAnalisisNumerico.PontenciasyMaximos;
 import HerramientaAnalisisNumerico.SumatorioyListado;
@@ -19,6 +20,8 @@ public class Interfaz {
     private JTextField fileInputTextField;
     private JTextField fileOutputTextField;
     private JTextArea fileResultTextArea;
+    private JTextField combTextField;
+    private JTextArea combResultTextArea;
 
     public Interfaz() {
         frame = new JFrame("Analizador");
@@ -38,6 +41,10 @@ public class Interfaz {
         // Panel de gestión de información
         JPanel infoManagementPanel = createInfoManagementPanel();
         tabbedPane.addTab("Gestión de Información", infoManagementPanel);
+
+        // Panel de combinaciones genéticas
+        JPanel geneticCombinationsPanel = createGeneticCombinationsPanel();
+        tabbedPane.addTab("Combinaciones Genéticas", geneticCombinationsPanel);
 
         frame.add(tabbedPane);
         frame.setVisible(true);
@@ -118,6 +125,30 @@ public class Interfaz {
         return panel;
     }
 
+    private JPanel createGeneticCombinationsPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        combTextField = new JTextField();
+        JButton calculateButton = new JButton("Calcular Combinaciones");
+        combResultTextArea = new JTextArea();
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateCombinations();
+            }
+        });
+
+        panel.add(new JLabel("Introduce un número:"));
+        panel.add(combTextField);
+        panel.add(calculateButton);
+        panel.add(new JLabel("Resultado:"));
+        panel.add(combResultTextArea);
+
+        return panel;
+    }
+
     private void analyzeDNA() {
         String dna = dnaTextField.getText();
         int count = ConteoGenes.contarGenes(dna);
@@ -140,6 +171,12 @@ public class Interfaz {
         } catch (IOException e) {
             fileResultTextArea.setText("Ocurrió un error al ordenar el archivo: " + e.getMessage());
         }
+    }
+
+    private void calculateCombinations() {
+        int num = Integer.parseInt(combTextField.getText());
+        CombinacionesGeneticas.calcularCombinaciones(num, "");
+        combResultTextArea.setText("Combinaciones calculadas. Consulta la consola para ver los resultados.");
     }
 
     public static void main(String[] args) {
